@@ -1,22 +1,22 @@
-import subprocess
-import sys
+#import subprocess
+#import sys
 
 import datetime as dt
-try:
-    import numpy as np
-    import pandas as pd
-    import sqlalchemy
-    from flask import Flask,jsonify
-except ImportError as e:
-    subprocess.check_call([sys.executable,"-m","pip","install","numpy"])
-    subprocess.check_call([sys.executable,"-m","pip","install","pandas"])
-    subprocess.check_call([sys.executable,"-m","pip","install","sqlalchemy"])
-    subprocess.check_call([sys.executable,"-m","pip","install","flask"])
-finally:
-    import numpy as np
-    import pandas as pd
-    import sqlalchemy
-    from flask import Flask,jsonify
+#try:
+import numpy as np
+import pandas as pd
+import sqlalchemy
+from flask import Flask,jsonify
+#except ImportError as e:
+  #  subprocess.check_call([sys.executable,"-m","pip","install","numpy"])
+    #subprocess.check_call([sys.executable,"-m","pip","install","pandas"])
+    #subprocess.check_call([sys.executable,"-m","pip","install","sqlalchemy"])
+    #subprocess.check_call([sys.executable,"-m","pip","install","flask"])
+#finally:
+  #  import numpy as np
+  #  import pandas as pd
+  #  import sqlalchemy
+  #  from flask import Flask,jsonify
 
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -27,8 +27,9 @@ app = Flask(__name__)
 engine = create_engine("sqlite:///hawaii.sqlite")
 Base = automap_base()
 Base.prepare(engine, reflect=True)
-# Measurement = Base.classes.measurement
-# Station = Base.classes.station
+print(Base.classes.keys())
+Measurement = Base.classes.measurement
+Station = Base.classes.station
 session = Session(engine)
 app = Flask(__name__)
 @app.route('/')
@@ -46,6 +47,8 @@ def welcome():
 	/api/v1.0/tobs
 	/api/v1.0/temp/start/end
 	''')
+
+
 
 # @app.route("/api/v1.0/precipitation")
 # def precipitation():
